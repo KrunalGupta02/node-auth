@@ -3,6 +3,7 @@ import Input from "../components/Input";
 import { Lock, Mail, User } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import PasswordStrengthMeter from "../components/PasswordStrengthMeter";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -51,6 +52,7 @@ const SignupPage = () => {
           />
 
           {/* Password Strength Meter */}
+          <PasswordStrengthMeter password={password} />
 
           <motion.button
             whileHover={{ scale: 1.02 }}
