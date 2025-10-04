@@ -2,18 +2,19 @@
   "name": "node-authentication",
   "version": "1.0.0",
   "main": "backend/index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
-    "dev":"nodemon backend/index.js",
+    "dev": "nodemon backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Krunal Gupta",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
