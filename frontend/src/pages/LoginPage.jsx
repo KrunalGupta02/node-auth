@@ -2,16 +2,27 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Input from "../components/Input";
 import { Loader, Lock, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const isLoading = false;
+  const { isLoading, login, error } = useAuthStore();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+
+    try {
+      await login(email, password);
+      navigate("/");
+      toast.success("User logged in successfully");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -33,7 +44,7 @@ const LoginPage = () => {
             placeholder="Enter your email"
             value={email}
             required
-            onChange={(e) => setEmail(e.target.email)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             icon={Lock}
@@ -41,8 +52,10 @@ const LoginPage = () => {
             placeholder="Enter your password"
             value={password}
             required
-            onChange={(e) => setPassword(e.target.password)}
+            onChange={(e) => setPassword(e.target.value)}
           />
+
+          {error && <p className="text-red-500 mt-2 font-semibold">{error}</p>}
 
           <Link
             to="/forgot-password"
