@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import DashboardPage from "./pages/DashboardPage";
 import NotFound from "./pages/NotFound";
 import LoadingSpinner from "./components/LoadingSpinner";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 // protected routes
 const ProtectedRoute = ({ children }) => {
@@ -37,7 +39,7 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 const App = () => {
-  const { checkAuth, isCheckingAuth, isAuthenticated, user } = useAuthStore();
+  const { checkAuth, isCheckingAuth } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
@@ -97,6 +99,22 @@ const App = () => {
           }
         />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route
+          path="/forgot-password"
+          element={
+            <RedirectAuthenticatedUser>
+              <ForgotPasswordPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+        <Route
+          path="/reset-password/:token"
+          element={
+            <RedirectAuthenticatedUser>
+              <ResetPasswordPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
         <Route path="/*" element={<NotFound />} />
       </Routes>
       <Toaster />
